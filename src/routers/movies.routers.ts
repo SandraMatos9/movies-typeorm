@@ -10,7 +10,6 @@ const  movieRouter = Router()
 movieRouter.post(
     "",bodyValidateMiddleware(moviesSchemas),nameExistsMiddleware,
     createMoviesController)
-
 movieRouter.get("",listMoviesController)
 movieRouter.patch("/:id",bodyValidateMiddleware(moviesSchemasUpdateRequest),idExistsMiddleware,nameExistsMiddleware,updateMoviesController)
 movieRouter.delete("/:id",idExistsMiddleware,deleteMoviesController)

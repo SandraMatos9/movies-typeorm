@@ -23,10 +23,6 @@ const listMoviesController = async(
     req:Request,
     res:Response
     ): Promise<Response> =>{
-    // const page= req.query.page
-    // const perPage=req.query.perPage
-    // const order:string|undefined= String(req.query.order)
-    // const sort:string|undefined= String(req.query.sort)
     const params= req.query
     const movies= await listMoviesService(params)
 

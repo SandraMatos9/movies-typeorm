@@ -9,15 +9,18 @@ import { allMoviesSchemasResponse } from "../../schemas/movies.schemas";
 export const listMoviesService = async({
     page="1",
     perPage="5",
-    sort="asc",
-    order="id"
+    sort="id",
+    order="asc"
 }) =>{
     const moviesRepository:Repository<Movie> = AppDataSource.getRepository(Movie)
   
    const sorts:string = sort ==='price'||sort==='duration'?sort:"id"
-    const orders:string =  order==='asc'||order==='desc'?order:'asc'
+    let orders:string =  order==='asc'||order==='desc'?order:'asc'
   
     // O tipo de ordenação (order) só deve funcionar caso sort seja enviado.
+    if(sorts === 'id'){
+        orders = 'asc'
+    }
     const pages:any = Number(page) >0 ? Number(page):1
 
     const perPages:any = Number(perPage) > 0 && Number(perPage) <=5 ? Number(perPage):5
@@ -37,9 +40,9 @@ export const listMoviesService = async({
    return{
     prevPage: pages-1>0?`http://localhost:3000/movies?page=${Number(pages)-1}&perPage=${perPages}`:null,
     
-    nextPage: `http://localhost:3000/movies?page=${Number(pages)+1}&perPage=${perPages}`,
+    nextPage: pages * perPages >= moviesList[1] ? null : `http://localhost:3000/movies?page=${Number(pages)+1}&perPage=${perPages}`,
+    count:moviesList[1],
     data: returnMovies,
-    count:moviesList[1]
    }
 }
 
