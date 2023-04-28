@@ -1,5 +1,5 @@
 import'reflect-metadata'
-import 'express-async-errorsyarn add'
+import 'express-async-errors'
 import express,{ Application } from "express";
 import { handleErros } from './error';
 import movieRouter from './routers/movies.routers';

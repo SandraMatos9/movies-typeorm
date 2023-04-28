@@ -1,11 +1,29 @@
 import { Repository } from "typeorm";
-import { TMoviesResponse } from "../../interfaces/movies.interface";
+import { TMoviesResponse, TMoviesUpdateRequest } from "../../interfaces/movies.interface";
 import { AppDataSource } from "../../data-source";
 import { Movie } from "../../entities";
+import { moviesSchemasResponse } from "../../schemas/movies.schemas";
+import { AppError } from "../../error";
 
-const idMoviesService = async(movieId):Promise <TMoviesResponse> =>{
+const updateMoviesService = async(
+    movieData:TMoviesUpdateRequest,
+    movieId:number
+    ):Promise <TMoviesResponse> =>{
+
     const moviesRepository:Repository<Movie>= AppDataSource.getRepository(Movie)
-    const movie = await moviesRepository.findOne({})
+    const oldMovieData:Movie|null= await moviesRepository.findOneBy({
+        id: movieId
+    })
+   
+    const newMovieData:Movie = moviesRepository.create({
+        ...oldMovieData,
+        ...movieData,
+    })
+
+    await moviesRepository.save(newMovieData)
+   
+    const returnMovie:TMoviesResponse = moviesSchemasResponse.parse(newMovieData)
+    return returnMovie
 }
 
-export default idMoviesService
+export default updateMoviesService

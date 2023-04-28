@@ -1,20 +1,23 @@
 import { z } from "zod";
 
 const moviesSchemas = z.object({
-    id: z.number(),
-    name:z.string(),
+    name:z.string().max(50),
     description:z.string().nullish(),
-    duration:z.number(),
-    price:z.number()
+    duration:z.number().int().positive(),
+    price:z.number().int().positive()
 })
 
-const moviesSchemasRequest = moviesSchemas
+const moviesSchemasResponse = moviesSchemas. extend({
+    id: z.number()
+
+})
+  
+//schema update
+const moviesSchemasUpdateRequest =moviesSchemas.partial()
   
 
 
-const moviesSchemasResponse = moviesSchemas
-
-const allMoviesSchemasResponse = z.array(moviesSchemasResponse)
+const allMoviesSchemasResponse = z.array(moviesSchemas)
 
 
-export{moviesSchemas,moviesSchemasRequest,moviesSchemasResponse,allMoviesSchemasResponse}
+export{moviesSchemas,moviesSchemasResponse,allMoviesSchemasResponse,moviesSchemasUpdateRequest}
