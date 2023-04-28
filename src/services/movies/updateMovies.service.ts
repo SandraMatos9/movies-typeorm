@@ -3,7 +3,6 @@ import { TMoviesResponse, TMoviesUpdateRequest } from "../../interfaces/movies.i
 import { AppDataSource } from "../../data-source";
 import { Movie } from "../../entities";
 import { moviesSchemasResponse } from "../../schemas/movies.schemas";
-import { AppError } from "../../error";
 
 const updateMoviesService = async(
     movieData:TMoviesUpdateRequest,

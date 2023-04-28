@@ -6,6 +6,7 @@ import { TMoviesPagination, TMoviesRequest, TMoviesResponse, TMoviesUpdateReques
 import idMoviesService from "../services/movies/updateMovies.service";
 import { number } from "zod";
 import updateMoviesService from "../services/movies/updateMovies.service";
+import { deleteMoviesService } from "../services/movies/deleteMovies.service";
 // import { deleteMoviesService } from "../services/movies/deleteMovies.service";
 
 const createMoviesController = async(
@@ -22,14 +23,13 @@ const listMoviesController = async(
     req:Request,
     res:Response
     ): Promise<Response> =>{
-    const page:number|undefined= Number(req.query.page)
-    const perPage:number|undefined= Number(req.query.perPage)
-    const order:string|undefined= String(req.query.order)
-    const sort:string|undefined= String(req.query.sort)
-    console.log("teste")
-    const movies= await listMoviesService(page,perPage,order,sort)
+    // const page= req.query.page
+    // const perPage=req.query.perPage
+    // const order:string|undefined= String(req.query.order)
+    // const sort:string|undefined= String(req.query.sort)
+    const params= req.query
+    const movies= await listMoviesService(params)
 
-    console.log(movies)
     return res.status(200).json(movies)
 }
 
@@ -49,10 +49,10 @@ const deleteMoviesController = async(
     res:Response
     ): Promise<Response> =>{
 
-    const moviesData:TMoviesRequest = req.body
-    const newMovies= await deleteMoviesService(moviesData)
-    return res.status(200).json(newMovies)
+    const movieId =parseInt(req.params.id)
+    const deleteMovies= await deleteMoviesService(movieId)
+    return res.status(204).json(deleteMovies)
 }
 
 
-export {createMoviesController,listMoviesController,updateMoviesController}
+export {createMoviesController,listMoviesController,updateMoviesController,deleteMoviesController}

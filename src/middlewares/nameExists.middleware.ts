@@ -1,5 +1,4 @@
 import { NextFunction,Request,Response } from "express";
-import { ZodTypeAny } from "zod";
 import { AppError } from "../error";
 import { AppDataSource } from "../data-source";
 import { Movie } from "../entities";

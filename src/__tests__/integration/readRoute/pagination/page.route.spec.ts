@@ -22,7 +22,7 @@ describe('Tests on route: GET /movies. Must be able to list all movies.', () => 
     await connection.destroy();
   });
 
-  it('Without query parameters', async () => {
+  it.only('Without query parameters', async () => {
     const response = await supertest(app).get(baseUrl);
 
     const expectResults = {

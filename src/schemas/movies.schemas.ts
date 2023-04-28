@@ -7,7 +7,7 @@ const moviesSchemas = z.object({
     price:z.number().int().positive()
 })
 
-const moviesSchemasResponse = moviesSchemas. extend({
+const moviesSchemasResponse = moviesSchemas.extend({
     id: z.number()
 
 })
@@ -17,7 +17,7 @@ const moviesSchemasUpdateRequest =moviesSchemas.partial()
   
 
 
-const allMoviesSchemasResponse = z.array(moviesSchemas)
+const allMoviesSchemasResponse = z.array(moviesSchemasResponse)
 
 
 export{moviesSchemas,moviesSchemasResponse,allMoviesSchemasResponse,moviesSchemasUpdateRequest}

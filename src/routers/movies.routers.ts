@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createMoviesController, listMoviesController, updateMoviesController } from "../controllers/movies.controllers";
+import { createMoviesController, deleteMoviesController, listMoviesController, updateMoviesController } from "../controllers/movies.controllers";
 import bodyValidateMiddleware from "../middlewares/bodyValidate.middleware";
 import { moviesSchemas, moviesSchemasUpdateRequest } from "../schemas/movies.schemas";
 import idExistsMiddleware from "../middlewares/idExists.middleware";
@@ -13,7 +13,7 @@ movieRouter.post(
 
 movieRouter.get("",listMoviesController)
 movieRouter.patch("/:id",bodyValidateMiddleware(moviesSchemasUpdateRequest),idExistsMiddleware,nameExistsMiddleware,updateMoviesController)
-movieRouter.delete("/:id")
+movieRouter.delete("/:id",idExistsMiddleware,deleteMoviesController)
 
 
 
