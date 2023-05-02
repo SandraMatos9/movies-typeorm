@@ -33,18 +33,15 @@ const updateMoviesController = async(
     const movieId:number= parseInt(req.params.id)
     const newMovieData:TMoviesResponse = await updateMoviesService(movieData,movieId)
     return res.json(newMovieData)
-
 }
 
 const deleteMoviesController = async(
     req:Request,
     res:Response
     ): Promise<Response> =>{
-
     const movieId =parseInt(req.params.id)
     const deleteMovies= await deleteMoviesService(movieId)
     return res.status(204).json(deleteMovies)
 }
-
 
 export {createMoviesController,listMoviesController,updateMoviesController,deleteMoviesController}
