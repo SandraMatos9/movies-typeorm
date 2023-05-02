@@ -5,7 +5,6 @@ import { TAllMoviesResponse } from "../../interfaces/movies.interface";
 import { allMoviesSchemasResponse } from "../../schemas/movies.schemas";
 
 
-//requisição: page, perpage,sort,order
 export const listMoviesService = async({
     page="1",
     perPage="5",
@@ -17,16 +16,12 @@ export const listMoviesService = async({
    const sorts:string = sort ==='price'||sort==='duration'?sort:"id"
     let orders:string =  order==='asc'||order==='desc'?order:'asc'
   
-    // O tipo de ordenação (order) só deve funcionar caso sort seja enviado.
     if(sorts === 'id'){
         orders = 'asc'
     }
     const pages:any = Number(page) >0 ? Number(page):1
-
     const perPages:any = Number(perPage) > 0 && Number(perPage) <=5 ? Number(perPage):5
 
-
-  
      const  moviesList = await moviesRepository.findAndCount({
             skip:(pages-1)*perPages,
             take:perPages,

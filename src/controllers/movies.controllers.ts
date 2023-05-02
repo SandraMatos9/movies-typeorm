@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
 import { createMoviesService } from "../services/movies/createMovies.service";
 import{listMoviesService} from "../services/movies/listMovies.service"
-import { Movie } from "../entities";
-import { TMoviesPagination, TMoviesRequest, TMoviesResponse, TMoviesUpdateRequest } from "../interfaces/movies.interface";
-import idMoviesService from "../services/movies/updateMovies.service";
-import { number } from "zod";
+import { TMoviesRequest, TMoviesResponse, TMoviesUpdateRequest } from "../interfaces/movies.interface";
 import updateMoviesService from "../services/movies/updateMovies.service";
 import { deleteMoviesService } from "../services/movies/deleteMovies.service";
-// import { deleteMoviesService } from "../services/movies/deleteMovies.service";
 
 const createMoviesController = async(
     req:Request,

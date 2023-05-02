@@ -12,12 +12,6 @@ const moviesSchemasResponse = moviesSchemas.extend({
 
 })
   
-//schema update
 const moviesSchemasUpdateRequest =moviesSchemas.partial()
-  
-
-
 const allMoviesSchemasResponse = z.array(moviesSchemasResponse)
-
-
 export{moviesSchemas,moviesSchemasResponse,allMoviesSchemasResponse,moviesSchemasUpdateRequest}
